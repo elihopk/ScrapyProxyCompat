@@ -8,7 +8,7 @@ setup(
   author = 'Eli Hopkins',
   author_email = 'ewh3157@rit.edu',
   url = 'https://github.com/elihopk/ScrapyProxyCompat',
-  download_url = 'https://github.com/elihopk/ScrapyProxyCompat/archive/refs/tags/v_01.tar.gz',
+  download_url = 'https://github.com/elihopk/ScrapyProxyCompat/archive/refs/tags/v_01_1.tar.gz',
   keywords = ['Scrapy', 'Proxy', 'socks5'],
   install_requires=[
           'scrapy',
