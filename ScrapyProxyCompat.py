@@ -7,13 +7,14 @@ from time import sleep
 class ScrapyProxyController:
     _proxyThreads = []
     _proxyAddresses = []
+    _started = False
 
     # Initialize Class Variables
-    def __init__(self, retry_time: float, retry_count: int, proxies:list=[], startingport:int=2000):
+    def __init__(self, retry_time:float=300.0, retry_count: int=5, proxies:list=[], starting_port:int=2000):
         self.proxies = proxies
         self.retry_time = retry_time
         self.retry_count = retry_count
-        self.startingport = startingport
+        self.starting_port = starting_port
 
     # Thread to handle a single proxy instance
     class ProxyThread(Thread):
@@ -89,23 +90,28 @@ class ScrapyProxyController:
                     )
                     sleep(self.retry_time)
 
+    # Starts the Proxies Provided in the Constructor
     def startProxies(self):
         for i, proxy in enumerate(self.proxies):
             self._proxyThreads.append(
                 self.ProxyThread(
                     proxy=proxy,
-                    localport=self.startingport + i,
+                    localport=self.starting_port + i,
                     retry_time=self.retry_time,
                     retry_count=self.retry_count,
                 )
             )
-            self._proxyAddresses.append("http://127.0.0.1:" + str(self.startingport + 1))
+            self._proxyAddresses.append("http://127.0.0.1:" + str(self.starting_port + 1))
             self._proxyThreads[i].start()
 
+    # Can be Used to Read Proxies to Connect PProxy to if 
     def readProxies(self, filePath):
+        if self._started:
+            raise Exception("Proxies already started!")
+
         proxyFile = open(filePath, "r")
 
-        # Loop for each proxy in socks5.txt
+        # Loop for each proxy in provided file
         for line in proxyFile:
             # Skip line if it's a comment
             if line[0] == "#" or line == "":
@@ -115,19 +121,32 @@ class ScrapyProxyController:
 
         proxyFile.close()
 
+    # Used to write Local Proxies to the Scrapy Proxy File
     def writeProxies(self, filePath):
+        if not self._started:
+            raise Exception("Proxies not yet started!")
+
         proxyFile = open(filePath, "w")
 
         for proxy in self._proxyAddresses:
-            if proxy.split(":")[-1] == self.startingport:
+            if proxy.split(":")[-1] == self.starting_port:
                 proxyFile.write(proxy)
             else:
                 proxyFile.write("\n" + proxy)
 
         proxyFile.close()
 
+    # Used to get a list of Proxy Threads
     def getProxies(self):
+        if not self._started:
+            raise Exception("Proxies not yet started!")
+
         return self._proxyThreads
 
+    # Used to get a list of Local Proxy Addresses.
+    # Can be used as a way to self handle connecting proxies to Scrapy.
     def getProxyAddresses(self):
+        if not self._started:
+            raise Exception("Proxies not yet started!")
+
         return self._proxyAddresses

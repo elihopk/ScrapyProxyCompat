@@ -9,9 +9,10 @@ setup(
   author_email = 'ewh3157@rit.edu',
   url = 'https://github.com/elihopk/ScrapyProxyCompat',
   download_url = 'https://github.com/elihopk/ScrapyProxyCompat/archive/refs/tags/v_01.tar.gz',
-  keywords = ['Scrapy', 'Proxy'],
+  keywords = ['Scrapy', 'Proxy', 'socks5'],
   install_requires=[
           'scrapy',
+          'pproxy',
       ],
   classifiers=[
     'Development Status :: 3 - Alpha',
