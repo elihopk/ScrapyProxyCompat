@@ -8,6 +8,8 @@ http://127.0.0.1:2000
 http://127.0.0.1:2001
 http://127.0.0.1:2002
 ```
+## Installation
+    To install ScrapyProxyCompat run `pip install ScrapyProxyCompat`
 ## Usage
     To begin using ScrapyProxyCompat, create an instance of the `ScrapyProxyController` class.
 ```
