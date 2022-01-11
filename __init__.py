@@ -1,1 +1,0 @@
-from ScrapyProxyCompat import ScrapyProxyController
