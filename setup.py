@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'ScrapyProxyCompat',
   packages = ['ScrapyProxyCompat'],
-  version = '0.1',
+  version = '0.1.1',
   license='MIT',
   description = 'A module to wrap PProxy and allow more proxy options in Scrapy',
   author = 'Eli Hopkins',
