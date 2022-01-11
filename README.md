@@ -1,7 +1,7 @@
 # ScrapyProxyCompat
 
 ## Introduction
-ScrapyProxyCompat is a Python module that wraps [pproxy](https://pypi.org/project/pproxy/) to allow a greater range of proxy types to be used with [Scrapy](https://scrapy.org/). It supports any type of remote connection that is supported by pproxy. This module should be used with a rotating proxy middleware such as [scrapy-rotating-proxy](https://github.com/TeamHG-Memex/scrapy-rotating-proxies). The middleware that you write or choose to use must accept a file input made up of one proxy server per line if you would like to use the `writeProxies(filePath)` method.
+ScrapyProxyCompat is a Python module that wraps [pproxy](https://pypi.org/project/pproxy/) to allow a greater range of proxy types to be used with [Scrapy](https://scrapy.org/). It supports any type of remote connection that is supported by pproxy. This module should be used with a rotating proxy middleware such as [scrapy-rotating-proxy](https://github.com/TeamHG-Memex/scrapy-rotating-proxies). ScrapyProxyCompat should be started before Scrapy and should be allowed to run in the background while Scrapy is crawling. The middleware that you write or choose to use must accept a file input made up of one proxy server per line if you would like to use the `writeProxies(filePath)` method.
 For example:
 ```
 http://127.0.0.1:2000
@@ -15,7 +15,7 @@ To install ScrapyProxyCompat run `pip install ScrapyProxyCompat`
 ## Usage
 To begin using ScrapyProxyCompat, create an instance of the `ScrapyProxyController` class.
 ```
-from ScrapyProxyCompat import ScrapyProxyController
+from ScrapyProxyCompat.ScrapyProxyCompat import ScrapyProxyController
 
 # Usage: ScrapyProxyController(retry_time:float=300.0, retry_count: int=5, proxies:list=[], starting_port:int=2000)
 # Where:
@@ -23,7 +23,7 @@ from ScrapyProxyCompat import ScrapyProxyController
 # retry_count is optional, the number of times to retry establishing a pproxy connection before allowing the Thread to die
 # proxies is an optional list of proxies following the normal PProxy syntax: [http, socks, ss, ssl, secure (Or a combination of these)]://ip_address:port#username:password
 # starting_port is an optional valid port number to be used as the starting local port. You should expect it to use this port +1 for each proxy
-controller = ScrapyProxyController(500.0, 10, ["http+ssl://proxyip.com:2323#Good:Creds"], 3000)
+controller = ScrapyProxyController(500.0, 10, ["http+ssl://proxyip.com:2323#Good:Creds", "socks5://proxyip.com:2323#Good:Creds"], 3000)
 ```
 If you provided a proxy list when creating the `ScrapyProxyController`, you can now start your proxies.
 ```
