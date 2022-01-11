@@ -92,6 +92,9 @@ class ScrapyProxyController:
 
     # Starts the Proxies Provided in the Constructor
     def startProxies(self):
+        if self._started:
+            raise Exception("Proxies already started!")
+
         for i, proxy in enumerate(self.proxies):
             self._proxyThreads.append(
                 self.ProxyThread(
@@ -103,6 +106,8 @@ class ScrapyProxyController:
             )
             self._proxyAddresses.append("http://127.0.0.1:" + str(self.starting_port + 1))
             self._proxyThreads[i].start()
+
+        self._started = True
 
     # Can be Used to Read Proxies to Connect PProxy to if 
     def readProxies(self, filePath):
