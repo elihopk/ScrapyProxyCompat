@@ -1,17 +1,19 @@
 # ScrapyProxyCompat
 
 ## Introduction
-  ScrapyProxyCompat is a Python module that wraps [pproxy](https://pypi.org/project/pproxy/) to allow a greater range of proxy types to be used with [Scrapy](https://scrapy.org/). It supports any type of remote connection that is supported by pproxy. This module should be used with a rotating proxy middleware such as [scrapy-rotating-proxy](https://github.com/TeamHG-Memex/scrapy-rotating-proxies). The middleware that you write or choose to use must accept a file input made up of one proxy server per line if you would like to use the `writeProxies(filePath)` method.
+ScrapyProxyCompat is a Python module that wraps [pproxy](https://pypi.org/project/pproxy/) to allow a greater range of proxy types to be used with [Scrapy](https://scrapy.org/). It supports any type of remote connection that is supported by pproxy. This module should be used with a rotating proxy middleware such as [scrapy-rotating-proxy](https://github.com/TeamHG-Memex/scrapy-rotating-proxies). The middleware that you write or choose to use must accept a file input made up of one proxy server per line if you would like to use the `writeProxies(filePath)` method.
 For example:
 ```
 http://127.0.0.1:2000
 http://127.0.0.1:2001
 http://127.0.0.1:2002
 ```
+
 ## Installation
-    To install ScrapyProxyCompat run `pip install ScrapyProxyCompat`
+To install ScrapyProxyCompat run `pip install ScrapyProxyCompat`
+    
 ## Usage
-    To begin using ScrapyProxyCompat, create an instance of the `ScrapyProxyController` class.
+To begin using ScrapyProxyCompat, create an instance of the `ScrapyProxyController` class.
 ```
 from ScrapyProxyCompat import ScrapyProxyController
 
