@@ -104,7 +104,7 @@ class ScrapyProxyController:
                     retry_count=self.retry_count,
                 )
             )
-            self._proxyAddresses.append("http://127.0.0.1:" + str(self.starting_port + 1))
+            self._proxyAddresses.append("http://127.0.0.1:" + str(self.starting_port + i))
             self._proxyThreads[i].start()
 
         self._started = True
